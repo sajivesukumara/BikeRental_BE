@@ -8,7 +8,7 @@ from sqlalchemy import Column, Integer, String, Date, ForeignKey
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
-from db.common import ModelBase
+from ..db.common import ModelBase
 
 
 Base = declarative_base()
@@ -98,15 +98,15 @@ class RentalsOrm(Base, ModelBase):
 
 
 class BikePricesOrm(Base):
-    __tablename__='bike_prices'
-    id=Column(Integer, primary_key=True, nullable=False)
+    __tablename__ = 'bike_prices'
+    id = Column(Integer, primary_key=True, nullable=False)
 
 
 class BikeAdditionalInfoOrm(Base):
-    __tablename__='bike_additional_info'
-    id=Column(Integer, primary_key=True, nullable=False)
+    __tablename__ = 'bike_additional_info'
+    id = Column(Integer, primary_key=True, nullable=False)
 
 
 class PaymentDetailsOrm(Base):
-    __tablename__='payment_details'
-    id=Column(Integer, primary_key=True, nullable=False)
+    __tablename__ = 'payment_details'
+    id = Column(Integer, primary_key=True, nullable=False)

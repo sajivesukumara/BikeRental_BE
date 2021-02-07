@@ -1,11 +1,7 @@
-FROM golang:rc-alpine
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
 
-COPY . /src
-ENV GO111MODULE=on
-RUN cd /src/cmd/go && go build -mod=vendor -o /usr/bin/go
+EXPOSE 8080
 
-EXPOSE 8067
+COPY ./app /app
 
-CMD ["/usr/bin/go", "--data=/data"]
-
-
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]

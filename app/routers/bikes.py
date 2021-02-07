@@ -1,6 +1,8 @@
+__author__ = 'sajive'
 from typing import Optional
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter, Depends
 from pydantic import BaseModel
+from ..dependencies import get_token_header
 
 
 class BikeIn(BaseModel):
@@ -20,15 +22,15 @@ class BikeOut(BaseModel):
     status: str
 
 
-app = FastAPI()
+app = APIRouter(
+    prefix="/bikes",
+    tags=["bikes"],
+    dependencies=[Depends(get_token_header)],
+    responses={404: {"description": "Not found"}},
+)
 
 
-@app.get("/")
-async def root():
-    return {"message": "Home Page"}
-
-
-@app.post("/bikes/")
+@app.post("/")
 async def create_item(bike: BikeIn):
     return bike
 
@@ -39,7 +41,7 @@ bike = [BikeOut(id=1, name="BMW", price=400.5, status="booked"),
         ]
 
 
-@app.get("/bikes")
+@app.get("/")
 async def get_bikes():
     return bike
 
